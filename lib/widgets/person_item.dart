@@ -22,23 +22,21 @@ class PersonItem extends StatelessWidget {
         selected: isSelected,
         selectedTileColor: Colors.grey[300],
         visualDensity: VisualDensity.comfortable,
-        contentPadding: const EdgeInsets.all(20),
+        contentPadding: const EdgeInsets.all(10),
         onTap: () {},
         leading: Stack(children: [
           isReserved
               ? TurnNumber(number: turnNumber)
-              : Container(
-                  padding: const EdgeInsets.all(10),
-                  color: Colors.blue,
-                  child: const Icon(
-                    Icons.person_2_sharp,
-                    color: Colors.white,
-                  )),
+              : const CircleAvatar(
+                  backgroundColor: Colors.blue,
+                  child: Icon(Icons.person_2_rounded),
+                ),
           isSelected
               ? Positioned(
-                  right: -5,
-                  bottom: -5,
+                  right: 0,
+                  bottom: 0,
                   child: Container(
+                      clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.green,
