@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viajes_uci_pr/widgets/add_person_form.dart';
 import 'package:viajes_uci_pr/widgets/person_list.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
               showModalBottomSheet(
                   context: context,
                   builder: (context) {
-                    return Placeholder();
+                    return AddPersonForm();
                   });
             },
             label: const Text("Agregar Persona"),
