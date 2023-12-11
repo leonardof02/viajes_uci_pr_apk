@@ -26,7 +26,7 @@ class AddPersonForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Form(
           child: Column(
         children: [
@@ -38,7 +38,7 @@ class AddPersonForm extends StatelessWidget {
               label: Text("CI"),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           TextFormField(
@@ -49,12 +49,12 @@ class AddPersonForm extends StatelessWidget {
               label: Text("Nombre y Apellido"),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           DropdownButtonFormField<String>(
               value: destinationController.text,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 contentPadding: EdgeInsets.all(10),
                 labelText: 'Selecciona un valor',
               ),
@@ -63,13 +63,20 @@ class AddPersonForm extends StatelessWidget {
                       (e) => DropdownMenuItem<String>(value: e, child: Text(e)))
                   .toList(),
               onChanged: handleChange),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
+          SizedBox(
               width: double.infinity,
               child: FilledButton(
-                  onPressed: () {}, child: Text("Agregar Persona")))
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text("Persona Agregada con exito"),
+                      backgroundColor: Colors.green,
+                    ));
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text("Agregar Persona")))
         ],
       )),
     );
