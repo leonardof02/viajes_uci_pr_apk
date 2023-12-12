@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:viajes_uci_pr/helpers/validator.dart';
 import 'package:viajes_uci_pr/models/person.dart';
 import 'package:viajes_uci_pr/riverpod/person_notifier.dart';
 import '../constants/destinations.dart';
@@ -14,20 +15,6 @@ class AddPersonForm extends ConsumerWidget {
 
   void handleChange(String? newValue) {
     destinationController.text = newValue ?? destinationController.text;
-  }
-
-  String? validateFullName(String? value) {
-    RegExp nameRegex = RegExp(r"^[a-zA-ZñÑ]+(\s[a-zA-ZñÑ]+)+$");
-    if (value != null && !nameRegex.hasMatch(value))
-      return "Por favor escribe nombre y apellidos";
-    return null;
-  }
-
-  String? validateId(String? value) {
-    RegExp idRegex = RegExp(r"^\d{11}$");
-    if (value != null && !idRegex.hasMatch(value))
-      return "Formato de Carnet de ID no valudo";
-    return null;
   }
 
   void addNewPerson(WidgetRef ref) {
@@ -48,7 +35,7 @@ class AddPersonForm extends ConsumerWidget {
             children: [
               TextFormField(
                 controller: idController,
-                validator: validateId,
+                validator: Validator.validateCubanCI,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: const InputDecoration(
                   hintText: "Escriba su numero de CI",
@@ -61,7 +48,7 @@ class AddPersonForm extends ConsumerWidget {
               ),
               TextFormField(
                 controller: nameController,
-                validator: validateFullName,
+                validator: Validator.validateFullName,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: const InputDecoration(
                   hintText: "Escriba su nombre y apellido",
