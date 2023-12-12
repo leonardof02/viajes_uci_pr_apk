@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:viajes_uci_pr/pages/home_page.dart';
 
@@ -8,7 +9,7 @@ void main() async {
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd3anJteGF3d3JlZWdkcWtmaXNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDIyNjQ1ODIsImV4cCI6MjAxNzg0MDU4Mn0.J_eqm7Cn8bpOuQsFE87yvm91_4TxrfsMTw6PXsLoAkI',
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
       home: const HomePage(),
     );
