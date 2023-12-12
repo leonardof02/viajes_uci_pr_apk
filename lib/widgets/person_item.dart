@@ -3,15 +3,15 @@ import 'package:viajes_uci_pr/widgets/turn_number.dart';
 
 class PersonItem extends StatelessWidget {
   final String name;
-  final String bridgeName;
-  final int turnNumber;
+  final String destination;
+  final int? turnNumber;
   final bool isReserved;
   final bool isSelected;
 
   const PersonItem(
       {super.key,
       required this.name,
-      required this.bridgeName,
+      required this.destination,
       required this.turnNumber,
       this.isSelected = false,
       this.isReserved = false});
@@ -25,8 +25,8 @@ class PersonItem extends StatelessWidget {
         contentPadding: const EdgeInsets.all(10),
         onTap: () {},
         leading: Stack(children: [
-          isReserved
-              ? TurnNumber(number: turnNumber)
+          isReserved && turnNumber != null
+              ? TurnNumber(number: turnNumber!)
               : const CircleAvatar(
                   backgroundColor: Colors.blue,
                   child: Icon(Icons.person_2_rounded),
@@ -49,7 +49,7 @@ class PersonItem extends StatelessWidget {
               : const SizedBox(),
         ]),
         title: Text(name),
-        subtitle: Text(bridgeName),
+        subtitle: Text(destination),
         trailing: FilledButton(
           onPressed: !isReserved ? () => {} : null,
           style: ButtonStyle(

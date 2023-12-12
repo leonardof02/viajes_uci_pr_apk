@@ -32,7 +32,8 @@ class HomePage extends StatelessWidget {
               },
               label: const Text("Agregar Persona"),
               icon: const Icon(Icons.person_add_alt_1_sharp)),
-          body: const TabBarView(children: [const PersonList(), Placeholder()])),
+          body:
+              const TabBarView(children: [PersonList(), Placeholder()])),
     );
   }
 }
