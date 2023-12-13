@@ -21,15 +21,10 @@ Person _$PersonFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Person {
   String get id => throw _privateConstructorUsedError;
-  set id(String value) => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
-  set fullName(String value) => throw _privateConstructorUsedError;
   String get destination => throw _privateConstructorUsedError;
-  set destination(String value) => throw _privateConstructorUsedError;
   bool get isReserved => throw _privateConstructorUsedError;
-  set isReserved(bool value) => throw _privateConstructorUsedError;
   int? get turn => throw _privateConstructorUsedError;
-  set turn(int? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -153,7 +148,7 @@ class __$$PersonImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PersonImpl implements _Person {
-  _$PersonImpl(
+  const _$PersonImpl(
       {required this.id,
       required this.fullName,
       required this.destination,
@@ -164,20 +159,40 @@ class _$PersonImpl implements _Person {
       _$$PersonImplFromJson(json);
 
   @override
-  String id;
+  final String id;
   @override
-  String fullName;
+  final String fullName;
   @override
-  String destination;
+  final String destination;
   @override
-  bool isReserved;
+  final bool isReserved;
   @override
-  int? turn;
+  final int? turn;
 
   @override
   String toString() {
     return 'Person(id: $id, fullName: $fullName, destination: $destination, isReserved: $isReserved, turn: $turn)';
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PersonImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.destination, destination) ||
+                other.destination == destination) &&
+            (identical(other.isReserved, isReserved) ||
+                other.isReserved == isReserved) &&
+            (identical(other.turn, turn) || other.turn == turn));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, fullName, destination, isReserved, turn);
 
   @JsonKey(ignore: true)
   @override
@@ -194,30 +209,25 @@ class _$PersonImpl implements _Person {
 }
 
 abstract class _Person implements Person {
-  factory _Person(
-      {required String id,
-      required String fullName,
-      required String destination,
-      required bool isReserved,
-      int? turn}) = _$PersonImpl;
+  const factory _Person(
+      {required final String id,
+      required final String fullName,
+      required final String destination,
+      required final bool isReserved,
+      final int? turn}) = _$PersonImpl;
 
   factory _Person.fromJson(Map<String, dynamic> json) = _$PersonImpl.fromJson;
 
   @override
   String get id;
-  set id(String value);
   @override
   String get fullName;
-  set fullName(String value);
   @override
   String get destination;
-  set destination(String value);
   @override
   bool get isReserved;
-  set isReserved(bool value);
   @override
   int? get turn;
-  set turn(int? value);
   @override
   @JsonKey(ignore: true)
   _$$PersonImplCopyWith<_$PersonImpl> get copyWith =>
