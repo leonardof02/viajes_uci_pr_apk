@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:viajes_uci_pr/models/person.dart';
 
-class PersonNotifier extends AsyncNotifier<List<dynamic>> {
+class PersonController extends AsyncNotifier<List<Person>> {
   Future<List<Person>> getPersonList() async {
     final prefs = await SharedPreferences.getInstance();
     final jsonString = prefs.getString("persons") ?? "[]";
@@ -21,8 +21,8 @@ class PersonNotifier extends AsyncNotifier<List<dynamic>> {
   Future<void> addPerson(Person newPerson) async {
     final prefs = await SharedPreferences.getInstance();
     state = const AsyncValue.loading();
-    List<dynamic> personList = await getPersonList();
-    state = await AsyncValue.guard(() async {
+    List<Person> personList = await getPersonList();
+    state = await AsyncValue.guard<List<Person>>(() async {
       personList.add(newPerson);
       prefs.setString("persons", jsonEncode(personList));
       return personList;
@@ -30,5 +30,5 @@ class PersonNotifier extends AsyncNotifier<List<dynamic>> {
   }
 }
 
-final personProvider = AsyncNotifierProvider<PersonNotifier, List<dynamic>>(
-    () => PersonNotifier());
+final personProvider = AsyncNotifierProvider<PersonController, List<Person>>(
+    () => PersonController());
