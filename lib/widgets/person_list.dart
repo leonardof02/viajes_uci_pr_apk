@@ -9,7 +9,7 @@ class PersonList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final personList = ref.watch(personProvider);
+    final personList = ref.watch(personProvider).value ?? [];
 
     return ListView.builder(
       itemCount: personList.length,

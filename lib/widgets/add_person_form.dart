@@ -17,7 +17,7 @@ class AddPersonForm extends ConsumerWidget {
     destinationController.text = newValue ?? destinationController.text;
   }
 
-  void addNewPerson(WidgetRef ref) {
+  Future<void> addNewPerson(WidgetRef ref) async {
     ref.read(personProvider.notifier).addPerson(Person(
         id: idController.text,
         fullName: nameController.text,
@@ -79,8 +79,8 @@ class AddPersonForm extends ConsumerWidget {
               SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) addNewPerson(ref);
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) await addNewPerson(ref);
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text("Persona Agregada con exito"),
