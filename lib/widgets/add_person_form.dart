@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viajes_uci_pr/helpers/validator.dart';
 import 'package:viajes_uci_pr/models/person.dart';
-import 'package:viajes_uci_pr/riverpod/person_notifier.dart';
+import 'package:viajes_uci_pr/riverpod/person_notifier_provider.dart';
 import '../constants/destinations.dart';
 
 class AddPersonForm extends ConsumerWidget {

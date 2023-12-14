@@ -7,6 +7,8 @@ class PersonItem extends StatelessWidget {
   final int? turnNumber;
   final bool isReserved;
   final bool isSelected;
+  final void Function() onLongPress;
+  final void Function() onTap;
 
   const PersonItem(
       {super.key,
@@ -14,16 +16,19 @@ class PersonItem extends StatelessWidget {
       required this.destination,
       required this.turnNumber,
       this.isSelected = false,
-      this.isReserved = false});
+      this.isReserved = false,
+      required this.onLongPress,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+        onLongPress: onLongPress,
+        onTap: onTap,
         selected: isSelected,
         selectedTileColor: Colors.grey[300],
         visualDensity: VisualDensity.comfortable,
         contentPadding: const EdgeInsets.all(10),
-        onTap: () {},
         leading: Stack(children: [
           isReserved && turnNumber != null
               ? TurnNumber(number: turnNumber!)

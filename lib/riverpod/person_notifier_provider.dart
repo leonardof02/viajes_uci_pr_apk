@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:viajes_uci_pr/models/person.dart';
+import 'package:viajes_uci_pr/riverpod/selected_persons_provider.dart';
 
 class PersonController extends AsyncNotifier<List<Person>> {
   Future<List<Person>> getPersonList() async {
@@ -14,7 +15,7 @@ class PersonController extends AsyncNotifier<List<Person>> {
   }
 
   @override
-  Future<List<Person>> build() async {
+  FutureOr<List<Person>> build() async {
     return getPersonList();
   }
 
@@ -27,6 +28,20 @@ class PersonController extends AsyncNotifier<List<Person>> {
       prefs.setString("persons", jsonEncode(personList));
       return personList;
     });
+  }
+
+  Future<void> removeSelectedPersons(List<bool> selectedIndexes) async {
+    // TODO: Implement remove persons
+    // final prefs = await SharedPreferences.getInstance();
+    // List<Person> personList = await getPersonList();
+    // List<Person> personsToSave = personList
+    //     .asMap()
+    //     .entries
+    //     .where((entry) => !selectedIndexes[entry.key]).toList().cast<Person>();
+    // state = await AsyncValue.guard<List<Person>>(() async {
+    //   prefs.setString("persons", jsonEncode(personsToSave));
+    //   return personList;
+    // });
   }
 }
 
