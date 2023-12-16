@@ -35,6 +35,7 @@ class PersonList extends ConsumerWidget {
             }
           }
         },
+        id: data[index].id,
         name: data[index].fullName,
         destination: data[index].destination,
         turnNumber: data[index].turn,

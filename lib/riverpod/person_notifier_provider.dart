@@ -31,17 +31,13 @@ class PersonController extends AsyncNotifier<List<Person>> {
   }
 
   Future<void> removeSelectedPersons(List<bool> selectedIndexes) async {
-    // TODO: Implement remove persons
-    // final prefs = await SharedPreferences.getInstance();
-    // List<Person> personList = await getPersonList();
-    // List<Person> personsToSave = personList
-    //     .asMap()
-    //     .entries
-    //     .where((entry) => !selectedIndexes[entry.key]).toList().cast<Person>();
-    // state = await AsyncValue.guard<List<Person>>(() async {
-    //   prefs.setString("persons", jsonEncode(personsToSave));
-    //   return personList;
-    // });
+    final prefs = await SharedPreferences.getInstance();
+    List<Person> personList = [ ... await getPersonList()];
+    personList.removeWhere((Person person) => selectedIndexes[ personList.indexOf(person) ] == true);
+    state = await AsyncValue.guard<List<Person>>(() async {
+      prefs.setString("persons", jsonEncode(personList));
+      return personList;
+    });
   }
 }
 

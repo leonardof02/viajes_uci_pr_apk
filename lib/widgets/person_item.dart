@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:viajes_uci_pr/widgets/turn_number.dart';
 
 class PersonItem extends StatelessWidget {
   final String name;
   final String destination;
+  final String id;
   final int? turnNumber;
   final bool isReserved;
   final bool isSelected;
@@ -18,7 +21,8 @@ class PersonItem extends StatelessWidget {
       this.isSelected = false,
       this.isReserved = false,
       required this.onLongPress,
-      required this.onTap});
+      required this.onTap,
+      required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -54,20 +58,40 @@ class PersonItem extends StatelessWidget {
               : const SizedBox(),
         ]),
         title: Text(name),
-        subtitle: Text(destination),
-        trailing: FilledButton(
-          onPressed: !isReserved ? () => {} : null,
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return Colors.green;
-                }
-                return Colors.red;
-              },
-            ),
-          ),
-          child: !isReserved ? const Text("Reservar") : const Text("Reservado"),
-        ));
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 5),
+            Text("CI: $id"),
+            Text("Puente: $destination"),
+            const SizedBox(height: 5),
+          ],
+        ),
+        trailing: !isSelected
+            ? FilledButton(
+                onPressed: !isReserved ? () => {} : null,
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.all(22)
+                  ),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                      if (states.contains(MaterialState.disabled)) {
+                        return Colors.green;
+                      }
+                      return Colors.red;
+                    },
+                  ),
+                ),
+                child: !isReserved
+                    ? const Text("RESERVAR")
+                    : const Text("RESERVADO"),
+              )
+            : null);
   }
 }

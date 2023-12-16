@@ -14,30 +14,34 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isEditing = ref.watch(editModeProvider);
-    final personList = ref.watch(personProvider);
     final selectedIndexes = ref.watch(selectedPersonsProvider);
 
     return Scaffold(
-      drawer: const AppDrawer(),
+        drawer: const AppDrawer(),
         appBar: DynamicAppBar(
             isEditing: isEditing,
             onDelete: () {
-              ref.read(personProvider.notifier).removeSelectedPersons( selectedIndexes );
+              ref
+                  .read(personProvider.notifier)
+                  .removeSelectedPersons(selectedIndexes);
+              ref.read(editModeProvider.notifier).setEditing(false);
             },
             onClose: () {
               ref.invalidate(selectedPersonsProvider);
               ref.read(editModeProvider.notifier).setEditing(false);
             }),
-        floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return AddPersonForm();
-                  });
-            },
-            label: const Text("Agregar Persona"),
-            icon: const Icon(Icons.person_add_alt_1_sharp)),
+        floatingActionButton: !isEditing
+            ? FloatingActionButton.extended(
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return AddPersonForm();
+                      });
+                },
+                label: const Text("Agregar Persona"),
+                icon: const Icon(Icons.person_add_alt_1_sharp))
+            : null,
         body: const PersonList());
   }
 }
